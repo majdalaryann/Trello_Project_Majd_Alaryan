@@ -6,7 +6,16 @@ class dataUtils {
     };
 
     deleteBoard = (boardID)=>{
-        cy.request(`DELETE`, `https://api.trello.com/1/boards/${boardID}?key=${APIKey}&token=${APIToken}`)
+        return cy.request(`DELETE`, `https://api.trello.com/1/boards/${boardID}?key=${APIKey}&token=${APIToken}`)
     };
+
+    creatList = (listName, boardID)=>{
+        return cy.request("POST", `https://api.trello.com/1/lists?name=${listName}&idBoard=${boardID}&key=${APIKey}&token=${APIToken}` );
+    };
+
+    creatCard = (cardName, listID)=>{
+        return cy.request("POST", `https://api.trello.com/1/cards?idList=${listID}&name=${cardName}&key=${APIKey}&token=${APIToken}`);
+    };
+    
 };
 export default dataUtils

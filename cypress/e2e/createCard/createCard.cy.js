@@ -1,6 +1,6 @@
 /// <reference types = "cypress" />
 
-import { Given, When, Then, Before, After} from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then} from "cypress-cucumber-preprocessor/steps";
 import dataUtils from "../../support/datautils.cy";
 import createCardActions from "../../pageObjects/createCard/actions.cy";
 import createCardAssertions from "../../pageObjects/createCard/assertions.cy";
@@ -8,6 +8,7 @@ import createCardAssertions from "../../pageObjects/createCard/assertions.cy";
 const boardName = `R3-board`
 const cardName = `My Card`
 let boardURL, boardID;
+
 
 const dataUtil = new dataUtils();
 const createCardAction = new createCardActions();
@@ -24,6 +25,8 @@ before(()=>{
     });
 
 });
+
+
 Given(`the user navigate to the board`, ()=>{
     createCardAction.openBoard(boardURL);
 });
@@ -46,5 +49,5 @@ creatCardAssertion.checkListIsContainCard(cardName);
 
 after(()=>{
     cy.wait(3500);
-    dataUtil.deleteBoard(boardID);
+   dataUtil.deleteBoard(boardID);
 });
