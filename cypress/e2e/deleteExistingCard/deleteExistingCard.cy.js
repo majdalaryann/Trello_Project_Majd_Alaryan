@@ -72,3 +72,4 @@ after(()=>{
     cy.wait(3500);
    dataUtil.deleteBoard(boardID);
 });
+

@@ -1,7 +1,9 @@
 class deleteCardActions{
 
     openBoard(boardURL){
-        cy.visit(boardURL)
+        cy.visit(boardURL);
+        cy.wait(3000);
+        cy.screenshot("board-screenshot", {capture: "fullPage", disableTimersAndAnimations: true,});
         return this;
     };
 
