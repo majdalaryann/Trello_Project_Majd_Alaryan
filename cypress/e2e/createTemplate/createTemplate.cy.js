@@ -1,18 +1,18 @@
 /// <reference types = "cypress" />
 
-import { Given, When, Then} from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
 import dataUtils from "../../support/datautils.cy";
-import deleteCardActions from "../../pageObjects/deleteExistingCard/actions.cy";
-import deleteCardAssertions from "../../pageObjects/deleteExistingCard/assertions.cy";
+import createTemplateActions from "../../pageObjects/createTemplate/actions.cy";
+import createTemplateAssertions from "../../pageObjects/createTemplate/Assertions.cy";
 
+const createTemplateAction = new createTemplateActions
+const createTemplateAssertion = new createTemplateAssertions
 const dataUtil = new dataUtils
-const deleteCardAction = new deleteCardActions();
-const deleteCardAssertion = new deleteCardAssertions();
-
 const boardName = `R3-board`
 const cardName = `My Card`
 const listName = `My List`
 let boardURL, boardID, listID, cardID;
+
 
 before(()=>{
     cy.loginToTrello();
@@ -38,34 +38,24 @@ before(()=>{
 });
 
 
-
 Given(`The user navigate to the board`, ()=>{
-    deleteCardAction.openBoard(boardURL);
+    createTemplateAction.openBoard(boardURL);
 });
-
 
 When(`The user clicks on the existing card`, ()=>{
-    deleteCardAction.clickOnCard(cardName)
+    createTemplateAction.clickOnCard(cardName);
 });
 
-
-When(`The user clicks on archive card`, ()=>{
-    deleteCardAction.clickOnArchiveCard()
+When(`The user clicks on Make template option`, ()=>{
+    createTemplateAction.clickOnMakeTemplate();
 });
 
-
-When(`The user clicks on delete option`, ()=>{
-    deleteCardAction.clickOndeleteOption()
+When(`The user will click on close of the template card created`, ()=>{
+    createTemplateAction.clickOnCloseOption();
 });
 
-
-When(`The user clicks on confirm delete option`, ()=>{
-    deleteCardAction.clickOnConfirmDeleteOption()
-});
-
-
-Then(`The card will be deleted successfully`, ()=>{
-    deleteCardAssertion.checkCardIsNotPresent(cardName)
+Then(`The template will be created successfully`, ()=>{
+    createTemplateAssertion.checkTemplatedIsCreated()
 });
 
 after(()=>{

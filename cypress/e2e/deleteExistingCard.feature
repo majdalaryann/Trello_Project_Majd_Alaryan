@@ -1,4 +1,4 @@
-@regressionTest
+@smokeTest @R_0
 Feature: Delete a card in Trello website
 
     Scenario: Validate that the user can delete an existing card
