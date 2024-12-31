@@ -1,19 +1,20 @@
 /// <reference types = "cypress" />
 
-import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+import {Given, When, Then} from "cypress-cucumber-preprocessor/steps";
 import dataUtils from "../../support/datautils.cy";
-import updateNameOfTemplateActions from "../../pageObjects/updateNameOfTemplate/actions.cy";
-import updateNameOfTemplateAssertions from "../../pageObjects/updateNameOfTemplate/assertions.cy";
+import moveTemplateCardActions from "../../pageObjects/moveTemplateCard/actions.cy";
+import moveTemplateCardAssertions from "../../pageObjects/moveTemplateCard/assertions.cy";
 
-
-const updateNameOfTemplateAction = new updateNameOfTemplateActions
-const updateNameOfTemplateAssertion = new updateNameOfTemplateAssertions
+const moveTemplateCardAction = new moveTemplateCardActions
+const moveTemplateCardAssertion = new moveTemplateCardAssertions
 const dataUtil = new dataUtils
 const boardName = `R3-board`
 const cardName = `My Card`
 const listName = `My List`
+const newListName = `To Do`
 const newCardName = `Majd's Card`
 let boardURL, boardID, listID, cardID;
+
 
 before(()=>{
     cy.loginToTrello();
@@ -36,7 +37,7 @@ before(()=>{
         cardID = rescard.body.id
 
     //Convert card to template in trello
-    dataUtil.convertCardToTemplate(cardID).then((tempres)=>{
+    dataUtil.convertCardToTemplate(cardID, newCardName).then((tempres)=>{
         cy.log(tempres.body.id);
         cardID = tempres.body.id
     });
@@ -45,28 +46,31 @@ before(()=>{
 });
 });
 
-
 Given(`The user navigate to the board`, ()=>{
-    updateNameOfTemplateAction.openBoard(boardURL);
+    moveTemplateCardAction.openBoard(boardURL);
 });
 
 When(`The user clicks on the existing card`, ()=>{
-    updateNameOfTemplateAction.clickOnCard(cardName);
+    moveTemplateCardAction.clickOnCard(newCardName);
 });
 
-When(`The user clicks on card name field and types the new name of the card`, ()=>{
-    updateNameOfTemplateAction.clickOnNameField(newCardName)
+When(`The user clicks on move option`, ()=>{
+    moveTemplateCardAction.clickOnMoveOption();
 });
 
-When(`The user close the template card`, ()=>{
-    updateNameOfTemplateAction.clickOnCloseOption();
+When(`The user choose To Do list from list field`, ()=>{
+    moveTemplateCardAction.chooseToDoListFromListOptions();
 });
 
-Then(`The card name should be updated successfully`, ()=>{
-    updateNameOfTemplateAssertion.checkListIsContainCard(newCardName);
+When(`The user clicks on move option from move card popover and click on close`, ()=>{
+    moveTemplateCardAction.clickOnMoveOptionAndClose();
 });
 
-after(()=>{
-    cy.wait(3500);
-   dataUtil.deleteBoard(boardID);
-});
+Then(`The template card should be moved successfully`, ()=>{
+    moveTemplateCardAssertion.verifyCardMovedToList(newCardName);
+ });
+
+ after(()=>{
+  cy.wait(3500);
+  dataUtil.deleteBoard(boardID);
+ });

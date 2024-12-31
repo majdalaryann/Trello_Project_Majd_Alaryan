@@ -25,6 +25,7 @@ before(()=>{
 
     //create a list in trello
     dataUtil.creatList(listName, boardID).then((res)=>{
+        cy.log(res.body.id);
         listID = res.body.id
         
     //create a card in trello 

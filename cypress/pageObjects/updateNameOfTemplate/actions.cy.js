@@ -11,7 +11,7 @@ class updateNameOfTemplateActions{
 
     clickOnNameField(newCardName){
         cy.findByTestId(`card-back-title-input`).click().clear().type(newCardName + `{enter}`);
-        return this
+        return this;
     };
 
     clickOnCloseOption(){

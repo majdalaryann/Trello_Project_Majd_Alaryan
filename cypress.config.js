@@ -8,6 +8,7 @@ e2e: {
   trashAssetsBeforeRuns: true,
   screenshotOnRunFailure: false,
   chromeWebSecurity: false,
+  failOnStatusCode: false,
 setupNodeEvents(on, config) {
 on("file:preprocessor", cucumber());
 },

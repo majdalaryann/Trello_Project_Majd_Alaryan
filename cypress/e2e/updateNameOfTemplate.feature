@@ -1,3 +1,4 @@
+@regressionTest @R_2
 Feature: Update the name of template in trello
 
 
