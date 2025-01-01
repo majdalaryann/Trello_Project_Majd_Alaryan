@@ -8,6 +8,7 @@ import createTemplateAssertions from "../../pageObjects/createTemplate/Assertion
 const createTemplateAction = new createTemplateActions
 const createTemplateAssertion = new createTemplateAssertions
 const dataUtil = new dataUtils
+
 const boardName = `R3-board`
 const cardName = `My Card`
 const listName = `My List`

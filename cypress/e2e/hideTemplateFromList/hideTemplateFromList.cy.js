@@ -2,26 +2,26 @@
 
 import {Given, When, Then} from "cypress-cucumber-preprocessor/steps";
 import dataUtils from "../../support/datautils.cy";
-import moveTemplateCardActions from "../../pageObjects/moveTemplateCard/actions.cy";
-import moveTemplateCardAssertions from "../../pageObjects/moveTemplateCard/assertions.cy";
+import hideTemplateFromListActions from "../../pageObjects/hideTemplateFromList/actions.cy";
+import hideTemplateFromListAssertions from "../../pageObjects/hideTemplateFromList/assertions.cy";
 
-const moveTemplateCardAction = new moveTemplateCardActions
-const moveTemplateCardAssertion = new moveTemplateCardAssertions
 const dataUtil = new dataUtils
+const hideTemplateFromListAction = new hideTemplateFromListActions
+const hideTemplateFromListAssertion = new hideTemplateFromListAssertions
 
 const boardName = `R3-board`
 const cardName = `My Card`
 const listName = `My List`
+const newListName = `To Do`
 const newCardName = `Majd's Card`
 let boardURL, boardID, listID, cardID;
-
 
 before(()=>{
     cy.loginToTrello();
     // create a board in trello
     dataUtil.createBoard(boardName).then((response)=>{
-    cy.log(response.body.url) 
-    cy.log(response.body.id)
+    cy.log(response.body.url);
+    cy.log(response.body.id);
     boardURL = response.body.url
     boardID = response.body.id
 
@@ -40,37 +40,40 @@ before(()=>{
     dataUtil.convertCardToTemplate(cardID, newCardName).then((tempres)=>{
         cy.log(tempres.body.id);
         cardID = tempres.body.id
+
+    // get to do list id
+    dataUtil.getToDoListId(newListName, boardID).then((newListID)=>{
+        cy.log(`To Do List ID : ${newListID}`);
+
+    // move template card to To Do list
+    dataUtil.moveTempCardToToDoList(cardID, newListID).then((moveres)=>{
+        cardID = moveres.body.id
     });
     });
     });
-});
+    });
+    });
+    });
 });
 
+
 Given(`The user navigate to the board`, ()=>{
-    moveTemplateCardAction.openBoard(boardURL);
+    hideTemplateFromListAction.openBorad(boardURL);
 });
 
 When(`The user clicks on the existing card`, ()=>{
-    moveTemplateCardAction.clickOnCard(newCardName);
+    hideTemplateFromListAction.clickOnCard(newCardName);
 });
 
-When(`The user clicks on move option`, ()=>{
-    moveTemplateCardAction.clickOnMoveOption();
+When(`The user clicks on Hide from list option and close the template card`, ()=>{
+    hideTemplateFromListAction.clickOnHideFromListOption();
 });
 
-When(`The user choose To Do list from list field`, ()=>{
-    moveTemplateCardAction.chooseToDoListFromListOptions();
+Then(`The template should be hidden successfully`, ()=>{
+    hideTemplateFromListAssertion.checkTemplateIsNotPresent(newCardName);
 });
 
-When(`The user clicks on move option from move card popover and click on close`, ()=>{
-    moveTemplateCardAction.clickOnMoveOptionAndClose();
-});
-
-Then(`The template card should be moved successfully`, ()=>{
-    moveTemplateCardAssertion.verifyCardMovedToList(newCardName);
- });
-
- after(()=>{
-  cy.wait(3500);
-  dataUtil.deleteBoard(boardID);
- });
+after(()=>{
+    cy.wait(3500);
+    dataUtil.deleteBoard(boardID);
+   });

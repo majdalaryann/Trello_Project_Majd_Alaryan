@@ -22,7 +22,19 @@ class dataUtils {
             isTemplate: true,
             name: newCardName,
         });
-    
+    };
+
+    getToDoListId = (newListName, boardID) => {
+        return cy.request("GET", `https://api.trello.com/1/boards/${boardID}/lists?key=${APIKey}&token=${APIToken}`).then((response) => {
+            const toDoList = response.body.find(list => list.name === newListName);
+            if (toDoList) {
+                return toDoList.id;
+            };
+        });
+    };
+
+    moveTempCardToToDoList = (cardID, newListID)=>{
+        return cy.request("PUT", `https://api.trello.com/1/cards/${cardID}?idList=${newListID}&key=${APIKey}&token=${APIToken}`);
+    };
 };
-};
-export default dataUtils
+export default dataUtils;

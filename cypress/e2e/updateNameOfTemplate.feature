@@ -1,7 +1,6 @@
 @regressionTest @R_2
 Feature: Update the name of template in trello
 
-
     Scenario: Validate that the user can update the name of template in trello
         Given The user navigate to the board
         When The user clicks on the existing card
