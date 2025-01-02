@@ -2,7 +2,7 @@
 Feature: Create Card in trello website
 
     Scenario: Validate that the user can create a new card
-        Given the user navigate to the board
+        Given The user navigate to the board
         When  The user Clicks on Add a Card button
         And The user types card name in card title input field
         And The user clicks on Add Card button

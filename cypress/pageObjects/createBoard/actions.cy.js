@@ -19,7 +19,5 @@ class createBoardActions{
         cy.wait(3000);
         return this;
     };
-
-
 };
 export default createBoardActions;

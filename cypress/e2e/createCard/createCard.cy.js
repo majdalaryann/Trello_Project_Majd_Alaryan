@@ -27,7 +27,7 @@ before(()=>{
 });
 
 
-Given(`the user navigate to the board`, ()=>{
+Given(`The user navigate to the board`, ()=>{
     createCardAction.openBoard(boardURL);
 });
 
