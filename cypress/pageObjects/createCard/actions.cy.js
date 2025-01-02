@@ -17,6 +17,6 @@ class createCardActions{
     clickOnAddCardButton(){
         cy.findByTestId("list-card-composer-add-card-button").click();
         return this;
-    }
+    };
 };
 export default createCardActions;
