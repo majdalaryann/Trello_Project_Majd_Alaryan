@@ -57,7 +57,7 @@ When(`The user will click on close of the template card created`, ()=>{
 });
 
 Then(`The template will be created successfully`, ()=>{
-    createTemplateAssertion.checkTemplatedIsCreated()
+    createTemplateAssertion.checkTemplatedIsCreated();
 });
 
 after(()=>{

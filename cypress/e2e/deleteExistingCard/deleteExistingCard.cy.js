@@ -46,27 +46,27 @@ Given(`The user navigate to the board`, ()=>{
 
 
 When(`The user clicks on the existing card`, ()=>{
-    deleteCardAction.clickOnCard(cardName)
+    deleteCardAction.clickOnCard(cardName);
 });
 
 
 When(`The user clicks on archive card`, ()=>{
-    deleteCardAction.clickOnArchiveCard()
+    deleteCardAction.clickOnArchiveCard();
 });
 
 
 When(`The user clicks on delete option`, ()=>{
-    deleteCardAction.clickOndeleteOption()
+    deleteCardAction.clickOndeleteOption();
 });
 
 
 When(`The user clicks on confirm delete option`, ()=>{
-    deleteCardAction.clickOnConfirmDeleteOption()
+    deleteCardAction.clickOnConfirmDeleteOption();
 });
 
 
 Then(`The card will be deleted successfully`, ()=>{
-    deleteCardAssertion.checkCardIsNotPresent(cardName)
+    deleteCardAssertion.checkCardIsNotPresent(cardName);
 });
 
 after(()=>{

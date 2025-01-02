@@ -1,7 +1,7 @@
 class createCardActions{
     openBoard(boardURL){
         cy.visit(boardURL)
-        return this
+        return this;
     };
 
     clickonAddACardButton(){

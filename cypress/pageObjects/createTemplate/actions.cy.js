@@ -6,17 +6,18 @@ class createTemplateActions{
     };
     clickOnCard(cardName){
         cy.contains(cardName).click();
-        return this
+        return this;
     };
 
     clickOnMakeTemplate(){
         cy.findByTestId(`card-back-make-template-button`).click();
-        return this
+        return this;
     };
 
     clickOnCloseOption(){
         cy.findByTestId(`CloseIcon`).first().click();
+        return this;
     };
 
 };
-export default createTemplateActions
+export default createTemplateActions;
