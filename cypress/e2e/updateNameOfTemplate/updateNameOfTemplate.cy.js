@@ -5,10 +5,10 @@ import dataUtils from "../../support/datautils.cy";
 import updateNameOfTemplateActions from "../../pageObjects/updateNameOfTemplate/actions.cy";
 import updateNameOfTemplateAssertions from "../../pageObjects/updateNameOfTemplate/assertions.cy";
 
-
 const updateNameOfTemplateAction = new updateNameOfTemplateActions
 const updateNameOfTemplateAssertion = new updateNameOfTemplateAssertions
 const dataUtil = new dataUtils
+
 const boardName = `R3-board`
 const cardName = `My Card`
 const listName = `My List`
