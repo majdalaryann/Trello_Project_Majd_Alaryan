@@ -26,15 +26,11 @@
 
 
 Cypress.Commands.add('loginToTrello', ()=>{ 
-    // cy.intercept(`
-    // https://atlassian-cookies--categories.us-east-1.prod.public.atl-paas.net/categories.json`).as("categories");
     cy.visit('/login');
     cy.get('#username').type(`majd.alaryann@gmail.com`);
     cy.get('#login-submit').click();
     cy.get('#password').type(`Test@$M234` + `{enter}`);
-    // cy.wait("@categories");
     cy.wait(3500);
-
 });
 
 Cypress.Commands.add('findByTestId', (testId)=> {
